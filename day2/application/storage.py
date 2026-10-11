@@ -1,47 +1,12 @@
-import json
-
-
-def save_students(students, filename):
-    """Save students to a JSON file."""
-    data = []
-
-    for student in students:
-        data.append(
-            {
-                "name": student.name,
-                "age": student.age,
-                "python": student.python,
-                "mathematics": student.mathematics,
-                "communication": student.communication,
-            }
-        )
-
-    with open(filename, "w") as file:
-        json.dump(data, file, indent=4)
-
-
-def load_students(filename, student_class):
-    """Load students from a JSON file."""
-    try:
-        with open(filename, "r") as file:
-            data = json.load(file)
-
-        students = []
-
-        for item in data:
-            student = student_class(
-                item["name"],
-                item["age"],
-                item["python"],
-                item["mathematics"],
-                item["communication"],
-            )
-            students.append(student)
-
-        return students
-
-    except FileNotFoundError:
-        return []
-
-    except json.JSONDecodeError:
-        return []
+import requests
+def get_user_details(user_id):
+"""Fetch user details from the external API."""
+try:
+response = requests.get(
+f"https://jsonplaceholder.typicode.com/users/{user_id}"
+)
+response.raise_for_status()
+return response.json()
+except requests.exceptions.RequestException as error:
+print("Request failed:", error)
+return None
