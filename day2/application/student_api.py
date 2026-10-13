@@ -10,7 +10,6 @@ def get_user_details(user_id):
         )
 
         response.raise_for_status()
-
         return response.json()
 
     except requests.exceptions.RequestException as error:
