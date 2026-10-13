@@ -39,7 +39,6 @@ while True:
 
         manager.add_student(student)
         save_students(manager.students, "students.json")
-
         print("Student added successfully.")
 
     elif choice == "2":
@@ -47,7 +46,6 @@ while True:
 
     elif choice == "3":
         name = input("Enter student name: ")
-
         student = manager.find_student(name)
 
         if student:
